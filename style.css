@@ -1,0 +1,137 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    font-size: 24px;
+}
+
+
+h1,
+h2 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+.visually-hidden {
+    position: absolute;
+    clip: rect(0 0 0 0);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+}
+
+
+header .container {
+    padding: 30px;
+    border-bottom: .5px solid gray;
+}
+
+header h1 {
+    font-size: 1.5em;
+}
+
+main .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    justify-items: center;
+    row-gap: 40px;
+    padding: 40px;
+    background-color: #f0e8ed;
+}
+
+main .calculator {
+    display: flex;
+    flex-direction: column;
+    padding: 2px;
+    max-width: 250px;
+    background-color: #c8c8c8;
+    border-radius: 1px;
+}
+
+main .calculator input {
+    width: 100%;
+    margin-bottom: 1px;
+    padding: 10px;
+    border: 0;
+    font-size: 1em;
+    text-align: right;
+    height: 40px;
+}
+
+.turn-grey {
+    color: grey;
+}
+
+.keys-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+}
+
+.keys-container button {
+    padding: 10px;
+    border: 0;
+    font-size: .7em;
+    background-color: #ebebeb;
+    max-height: 40px;
+}
+
+.keys-container button:hover {
+    background-color: #dadada;
+}
+
+.wide-key {
+    grid-column: span 2;
+}
+
+.keys-container .number {
+    background-color: #fff;
+}
+
+.keys-container .equal {
+    background-color: rgba(101, 255, 204, 0.7);
+}
+
+.keys-container .equal:hover {
+    background-color: rgba(89, 221, 177, 0.753);
+}
+
+.keys-container .operation {
+    background-color: #ffd90b;
+}
+
+.keys-container .operation:hover {
+    background-color: #ddc750;
+}
+
+.logs-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    width: 250px;
+    height: 290px;
+    border: 2px solid #c8c8c8;
+    border-radius: 1px;
+}
+
+.logs-container li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 41px;
+    padding: 10px;
+    text-align: right;
+    border-bottom: 1px solid #c8c8c8;
+    background-color: #fff;
+}
+
+.expression {
+    color: grey;
+    font-size: .6em;
+}
+
+.result {
+    font-size: .8em;
+}
