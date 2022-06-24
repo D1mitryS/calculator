@@ -50,14 +50,28 @@ main .calculator {
     border-radius: 1px;
 }
 
-main .calculator input {
+.screen {
     width: 100%;
+    display: flex;
     margin-bottom: 1px;
+    height: 40px;
+}
+
+.screen .buffer {
+    min-width: 61.75px;
+    padding: 5px;
+    font-size: .6em;
+    color: grey;
+    background-color: #fff;
+    border-right: 1px solid #c8c8c8;
+}
+
+.screen input {
+    width: 100%;
     padding: 10px;
     border: 0;
     font-size: 1em;
     text-align: right;
-    height: 40px;
 }
 
 .turn-grey {
