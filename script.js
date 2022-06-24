@@ -1,11 +1,9 @@
 const inputField = document.querySelector('#input-field');
+
+//Controls if 'inputField' value must be overwritten on input
 let resetAfterOperation = true;
 
-/* 
-Node of number buttons.
-Overwrites 'inputField' if 'resetAfterOperation' === true.
-Adding target's textContent to 'inputField'. 
-*/
+//Node of number buttons
 const numBtns = document.querySelectorAll('.number').forEach(numBtn => {
     numBtn.addEventListener('click', (event) => {
         if (resetAfterOperation) {
@@ -19,9 +17,9 @@ const numBtns = document.querySelectorAll('.number').forEach(numBtn => {
 
 /* 
 Node of binary operation buttons.
-Calculates previous binary operation if exists.
-Reassign 'nextBinaryOperation' value to target's dataset. 
-Reassign 'firstNum' value to current 'inputField' value. 
+'nextBinaryOperations' is used to calculate result by 'calculate' func
+Calculates previous binary operation if exists and overwrites it.
+'loggedSign' is used by 'addIntoBuffer' and 'logOperation' funcs to store an arithmetic sign.
 */
 let firstNum = 0;
 let nextBinaryOperation = '';
@@ -46,10 +44,9 @@ equalsBtn.addEventListener('click', () => {
 });
 
 /*
-Reassign 'secondNum' value to current 'inputField' value. 
 Calculates result based on 'nextBinaryOperation' value by calling 'Basic functions'.
 nextBinaryOperation = '' is necessary for correct 'backSpace' and 'unaryOperationBtns' use.
-Adds 'firstNum', 'secondNum' and 'loggedSign' into 'logList'.
+Adds the arithmetical operation and result intto 'logList' and 'operationBuffer'..
 */
 let secondNum = 0;
 let loggedSign = '';
@@ -95,7 +92,6 @@ allClearBtn.addEventListener('click', () => {
     logList.textContent = '';
 });
 
-// Resets main vars to initial state
 const clearBtn = document.querySelector('#clear');
 clearBtn.addEventListener('click', () => {
     clear();
@@ -113,9 +109,8 @@ const clear = () => {
 };
 
 /* 
-Works only before nextBinaryOpperation is reassigned or after 'equalsBtn' pressed.
-Deletes last symbol from 'inputField'. 
-Overwrites last deleted symbol with 0 and allows it to be overwritten by 'numBtns'.
+Works only before nextBinaryOpperation is reassigned by 'binaryOperationBtns' 
+or after 'equalsBtn' was pressed.
 */
 const backSpace = document.querySelector('#backspace');
 backSpace.addEventListener('click', () => {
@@ -136,8 +131,7 @@ backSpace.addEventListener('click', () => {
 /* 
 Node of unary operations buttons.
 Calculates previous binaryOperation if exists.
-Calculates result based on target's dataset.
-Adds result and operation to 'logList'.
+Adds arithmetical operation and result to 'logList' and 'operationBuffer'.
 */
 const unaryOperationBtns = document.querySelectorAll('.unary-operation').forEach(operationBtn => {
     operationBtn.addEventListener('click', (event) => {
@@ -175,7 +169,7 @@ const revertSign = num => {
     return Math.abs(num);
 };
 
-//Add to log functions
+//Add to log funcs
 const logList = document.querySelector('#log-list');
 
 const addBinaryToLog = () => {
