@@ -78,13 +78,13 @@ main .calculator {
     color: grey;
 }
 
-.keys-container {
+.keys {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 1px;
 }
 
-.keys-container button {
+.keys button {
     padding: 10px;
     border: 0;
     font-size: .7em;
@@ -92,7 +92,7 @@ main .calculator {
     max-height: 40px;
 }
 
-.keys-container button:hover {
+.keys button:hover {
     background-color: #dadada;
 }
 
@@ -100,23 +100,23 @@ main .calculator {
     grid-column: span 2;
 }
 
-.keys-container .number {
+.keys .number {
     background-color: #fff;
 }
 
-.keys-container .equal {
+.keys .equal {
     background-color: rgba(101, 255, 204, 0.7);
 }
 
-.keys-container .equal:hover {
+.keys .equal:hover {
     background-color: rgba(89, 221, 177, 0.753);
 }
 
-.keys-container .operation {
+.keys .operation {
     background-color: #ffd90b;
 }
 
-.keys-container .operation:hover {
+.keys .operation:hover {
     background-color: #ddc750;
 }
 
