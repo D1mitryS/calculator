@@ -147,9 +147,7 @@ const unaryOperationBtns = document.querySelectorAll('.unary-operation').forEach
             addOperationIntoBuffer();
         };
 
-        firstNum = 0;
-        loggedSign = '';
-        resetAfterOperation = true;
+        clear();
     });
 });
 
