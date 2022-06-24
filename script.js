@@ -34,6 +34,8 @@ const binaryOperationBtns = document.querySelectorAll('.operation').forEach(oper
         firstNum = Number(inputField.value) || 0;
         nextBinaryOperation = event.currentTarget.dataset.operation;
         resetAfterOperation = true;
+        addOperationIntoBuffer();
+
         inputField.classList.add('turn-grey');
     });
 });
@@ -73,6 +75,7 @@ const calculate = () => {
     };
 
     addBinaryToLog();
+    addResultIntoBuffer();
     clear();
 };
 
@@ -88,6 +91,7 @@ const allClearBtn = document.querySelector('#clear-all');
 allClearBtn.addEventListener('click', () => {
     clear();
     inputField.value = 0;
+    operationBuffer.textContent = '';
     logList.textContent = '';
 });
 
@@ -96,6 +100,7 @@ const clearBtn = document.querySelector('#clear');
 clearBtn.addEventListener('click', () => {
     clear();
     inputField.value = 0;
+    operationBuffer.textContent = '';
 });
 
 const clear = () => {
@@ -115,6 +120,8 @@ Overwrites last deleted symbol with 0 and allows it to be overwritten by 'numBtn
 const backSpace = document.querySelector('#backspace');
 backSpace.addEventListener('click', () => {
     if (!nextBinaryOperation) {
+        operationBuffer.textContent = '';
+
         const inputLen = inputField.value.length;
 
         if (inputLen >= 2) {
@@ -151,6 +158,7 @@ const unaryOperationBtns = document.querySelectorAll('.unary-operation').forEach
             addUnaryToLog();
         } else if (nextUnaryOperation === 'revert-sign') {
             inputField.value = revertSign(firstNum);
+            addOperationIntoBuffer();
         };
 
         firstNum = 0;
@@ -184,4 +192,15 @@ const addUnaryToLog = () => {
             <output class="expression">${firstNum} ${loggedSign}</output>
             <output class="result">${inputField.value}</output>
         </li>`);
+};};
+
+//Add to buffer funcs
+const operationBuffer = document.querySelector('#operation-buffer');
+
+const addOperationIntoBuffer = () => {
+    operationBuffer.innerHTML = `${firstNum} ${storedSign}`;
+};
+
+const addResultIntoBuffer = () => {
+    operationBuffer.textContent = `${firstNum} ${storedSign} ${secondNum}`;
 };
