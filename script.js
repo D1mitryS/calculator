@@ -10,7 +10,9 @@ const numBtns = document.querySelectorAll('.number').forEach(numBtn => {
             inputField.value = '';
             resetAfterOperation = false;
         };
+
         inputField.value += event.currentTarget.value;
+
         inputField.classList.remove('turn-grey');
     });
 });
@@ -23,15 +25,19 @@ Calculates previous binary operation if exists and overwrites it.
 */
 let firstNum = 0;
 let nextBinaryOperation = '';
+let storedSign = '';
 
 const binaryOperationBtns = document.querySelectorAll('.operation').forEach(operationBtn => {
     operationBtn.addEventListener('click', (event) => {
         if (nextBinaryOperation) {
             calculate();
         };
+
         firstNum = Number(inputField.value) || 0;
         nextBinaryOperation = event.currentTarget.dataset.operation;
         resetAfterOperation = true;
+
+        storedSign = event.currentTarget.value;
         addOperationIntoBuffer();
 
         inputField.classList.add('turn-grey');
@@ -49,29 +55,17 @@ nextBinaryOperation = '' is necessary for correct 'backSpace' and 'unaryOperatio
 Adds the arithmetical operation and result intto 'logList' and 'operationBuffer'..
 */
 let secondNum = 0;
-let loggedSign = '';
 
 const calculate = () => {
     secondNum = Number(inputField.value, 10) || 0;
 
-    if (nextBinaryOperation === 'summarize') {
-        inputField.value = summarize(firstNum, secondNum);
-        loggedSign = '+';
-    } else if (nextBinaryOperation === 'substract') {
-        inputField.value = substract(firstNum, secondNum);
-        loggedSign = '-';
-    } else if (nextBinaryOperation === 'divide') {
-        inputField.value = divide(firstNum, secondNum);
-        loggedSign = '/';
-    } else if (nextBinaryOperation === 'multiply') {
-        inputField.value = multiply(firstNum, secondNum);
-        loggedSign = '*';
-    } else if (nextBinaryOperation === 'percentage') {
-        inputField.value = getPercentage(firstNum, secondNum);
-        loggedSign = '%';
-    };
+    if (nextBinaryOperation === 'summarize') inputField.value = summarize(firstNum, secondNum);
+    else if (nextBinaryOperation === 'substract') inputField.value = substract(firstNum, secondNum);
+    else if (nextBinaryOperation === 'divide') inputField.value = divide(firstNum, secondNum);
+    else if (nextBinaryOperation === 'multiply') inputField.value = multiply(firstNum, secondNum);
+    else if (nextBinaryOperation === 'percentage') inputField.value = getPercentage(firstNum, secondNum);;
 
-    addBinaryToLog();
+    logBinaryOperation();
     addResultIntoBuffer();
     clear();
 };
@@ -104,7 +98,7 @@ const clear = () => {
     secondNum = 0;
     nextBinaryOperation = '';
     resetAfterOperation = true;
-    loggedSign = '';
+    storedSign = '';
     inputField.classList.remove('turn-grey');
 };
 
@@ -142,16 +136,14 @@ const unaryOperationBtns = document.querySelectorAll('.unary-operation').forEach
         firstNum = Number(inputField.value) || 0;
         const nextUnaryOperation = event.currentTarget.dataset.operation;
 
-        if (nextUnaryOperation === 'square') {
-            inputField.value = Math.pow(firstNum, 2);
-            loggedSign = '^';
-            addUnaryToLog();
-        } else if (nextUnaryOperation === 'square-root') {
-            inputField.value = Math.sqrt(firstNum);
-            loggedSign = '√';
-            addUnaryToLog();
-        } else if (nextUnaryOperation === 'revert-sign') {
-            inputField.value = revertSign(firstNum);
+        if (nextUnaryOperation === 'square') inputField.value = Math.pow(firstNum, 2);
+        else if (nextUnaryOperation === 'square-root') inputField.value = Math.sqrt(firstNum);
+        else if (nextUnaryOperation === 'revert-sign') inputField.value = revertSign(firstNum);
+
+        storedSign = event.currentTarget.value;
+
+        if (storedSign) {
+            logUnaryOperation();
             addOperationIntoBuffer();
         };
 
@@ -172,21 +164,21 @@ const revertSign = num => {
 //Add to log funcs
 const logList = document.querySelector('#log-list');
 
-const addBinaryToLog = () => {
+const logBinaryOperation = () => {
     logList.insertAdjacentHTML('beforeend',
         `<li>
-            <output class="expression">${firstNum} ${loggedSign} ${secondNum}</output>
+            <output class="expression">${firstNum} ${storedSign} ${secondNum}</output>
             <output class="result">${inputField.value}</output>
         </li>`);
 };
 
-const addUnaryToLog = () => {
+const logUnaryOperation = () => {
     logList.insertAdjacentHTML('beforeend',
         `<li>
-            <output class="expression">${firstNum} ${loggedSign}</output>
+            <output class="expression">${firstNum} ${storedSign}</output>
             <output class="result">${inputField.value}</output>
         </li>`);
-};};
+};
 
 //Add to buffer funcs
 const operationBuffer = document.querySelector('#operation-buffer');
