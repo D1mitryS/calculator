@@ -57,17 +57,19 @@ Adds the arithmetical operation and result intto 'logList' and 'operationBuffer'
 let secondNum = 0;
 
 const calculate = () => {
-    secondNum = Number(inputField.value, 10) || 0;
+    if (nextBinaryOperation) {
+        secondNum = Number(inputField.value, 10) || 0;
 
-    if (nextBinaryOperation === 'summarize') inputField.value = summarize(firstNum, secondNum);
-    else if (nextBinaryOperation === 'substract') inputField.value = substract(firstNum, secondNum);
-    else if (nextBinaryOperation === 'divide') inputField.value = divide(firstNum, secondNum);
-    else if (nextBinaryOperation === 'multiply') inputField.value = multiply(firstNum, secondNum);
-    else if (nextBinaryOperation === 'percentage') inputField.value = getPercentage(firstNum, secondNum);;
-
-    logBinaryOperation();
-    addResultIntoBuffer();
-    clear();
+        if (nextBinaryOperation === 'summarize') inputField.value = summarize(firstNum, secondNum);
+        else if (nextBinaryOperation === 'substract') inputField.value = substract(firstNum, secondNum);
+        else if (nextBinaryOperation === 'divide') inputField.value = divide(firstNum, secondNum);
+        else if (nextBinaryOperation === 'multiply') inputField.value = multiply(firstNum, secondNum);
+        else if (nextBinaryOperation === 'percentage') inputField.value = getPercentage(firstNum, secondNum);;
+    
+        logBinaryOperation();
+        addResultIntoBuffer();
+        clear();
+    };
 };
 
 // Basic functions
